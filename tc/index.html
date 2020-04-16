@@ -1,0 +1,22 @@
+ 
+<head>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div>
+        <iframe src="https://store.steampowered.com/widget/1260820/" 
+        frameborder="0" width="646" height="190"></iframe>
+    </div>
+
+    <video controls autoplay muted loop id="vid1">
+        <source src="https://steamcdn-a.akamaihd.net/steam/apps/256777865/movie_max_vp9.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        document.getElementById('vid1').addEventListener('loadedmetadata', function() {
+            //this.currentTime = 50;
+        }, false);
+    </script>
+</body>
+

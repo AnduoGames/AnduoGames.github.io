@@ -1,0 +1,30 @@
+div {
+	width: 646px;
+	height: 190px;
+    background-color: #2d3038;
+
+    position: relative;
+
+    top: 45px;
+    
+	margin-left:auto;
+    margin-right:auto;
+}
+
+body {
+    background-color: #212329;
+    background-image: url('Peitho_Training_LevelBackground.jpg');
+}
+
+video {
+	width: 960px;
+	height: 560px; 
+
+    position: relative;
+
+    top: 90px;
+
+    margin-left: auto;
+    margin-right: auto;
+    display: block
+}
