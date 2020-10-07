@@ -1,0 +1,13 @@
+
+skeleton.png
+size: 281,822
+format: RGBA8888
+filter: Linear,MipMap
+repeat: none
+mascot
+  rotate: false
+  xy: 2, 2
+  size: 277, 818
+  orig: 277, 818
+  offset: 0, 0
+  index: -1
