@@ -7,6 +7,7 @@
 	var headIKTarget;
 	var bodyIKTarget;
 	var IKFollowStrength = 0.25;
+	var didLeaveScreen = false;
 	var coords = new spine.webgl.Vector3(), temp = new spine.webgl.Vector3();
 
 	let player = new spine.SpinePlayer("player-container", {
@@ -48,18 +49,27 @@
 		player.animationState.setAnimation(3, "Head Sway", true);
 		player.animationState.setAnimation(4, "ClickInteract", false);
 	});
+
 	document.addEventListener("mouseleave", () => {
-		
+		didLeaveScreen = true;
+	});
+
+	document.addEventListener("mouseenter", () => {
+		didLeaveScreen = false;
 	});
 
 	requestAnimationFrame(update);
 
 	function update(){
-		if(temp != undefined && headIKTarget != undefined){
+		if(temp != undefined && headIKTarget != undefined && bodyIKTarget != null){
 			headIKTarget.x = lerp(headIKTarget.x, temp.x, 0.016 * 4);
 			headIKTarget.y = 1000;
 			bodyIKTarget.x = lerp(bodyIKTarget.x, temp.x, 0.016 * 4);
 			bodyIKTarget.y = 1000;
+		}
+
+		if(didLeaveScreen){
+			temp.x = lerp(temp.x, 0, 0.016 * 2);
 		}
 
 		requestAnimationFrame(update);
