@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "v1l3aLZYExfCgaGARtCE3UkotM0",
+	"hash": "TFS6eOQgS08Ic9CdI/SySL8a3HY",
 	"spine": "3.8.99",
 	"x": -348.29,
 	"y": -1022.07,
@@ -32,7 +32,8 @@
 	{ "name": "Right Leg", "parent": "root", "x": 52.76, "y": -849.35, "color": "ff3f00ff" },
 	{ "name": "Left Leg", "parent": "root", "x": -191.61, "y": -866.55, "color": "ff3f00ff" },
 	{ "name": "bone19", "parent": "bone4", "length": 17.76, "rotation": 76.41, "x": 90.89, "y": 167.44 },
-	{ "name": "Head Target", "parent": "root", "x": -33.08, "y": 927.4, "color": "ff3f00ff" }
+	{ "name": "Head Target", "parent": "root", "x": -33.08, "y": 927.4, "color": "ff3f00ff" },
+	{ "name": "Upper Body Target", "parent": "root", "x": 11.17, "y": 585.27, "color": "ff3f00ff" }
 ],
 "slots": [
 	{ "name": "mascot", "bone": "root", "attachment": "mascot" }
@@ -40,14 +41,14 @@
 "ik": [
 	{
 		"name": "Head Target",
-		"order": 1,
+		"order": 2,
 		"bones": [ "bone6", "bone9" ],
 		"target": "Head Target",
 		"mix": 0.25
 	},
 	{
 		"name": "Left Leg",
-		"order": 2,
+		"order": 3,
 		"bones": [ "bone13", "bone14" ],
 		"target": "Left Leg",
 		"softness": 9.9,
@@ -59,6 +60,14 @@
 		"target": "Right Leg",
 		"softness": 9.9,
 		"bendPositive": false
+	},
+	{
+		"name": "Upper Body Target",
+		"order": 1,
+		"bones": [ "bone4", "bone5" ],
+		"target": "Upper Body Target",
+		"mix": 0.1,
+		"softness": 10
 	}
 ],
 "skins": [

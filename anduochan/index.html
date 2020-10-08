@@ -5,6 +5,8 @@
 
 <script>
 	var headIKTarget;
+	var bodyIKTarget;
+	var IKFollowStrength = 0.25;
 	var coords = new spine.webgl.Vector3(), temp = new spine.webgl.Vector3();
 
 	let player = new spine.SpinePlayer("player-container", {
@@ -21,29 +23,49 @@
 			player.animationState.setAnimation(2, "Hair Sway", true);
 			player.animationState.setAnimation(3, "Head Sway", true);
 			clearInterval(intervalId);
+
 			headIKTarget = player.skeleton.findBone("Head Target");
+			bodyIKTarget = player.skeleton.findBone("Upper Body Target");
 
 			var input = new spine.webgl.Input(player.canvas);
 			input.addListener({
 				moved: function (x, y) {
 					player.sceneRenderer.camera.screenToWorld(coords.set(x, y, 0), player.canvas.width, player.canvas.height);
 					headIKTarget.parent.worldToLocal(temp.set(coords.x, coords.y));
-					headIKTarget.x = temp.x;
-					headIKTarget.y = 1000;
+					temp.x *= IKFollowStrength;
 				},
-				down: function(x, y) {
+				dragged: function(x, y) {
 					player.sceneRenderer.camera.screenToWorld(coords.set(x, y, 0), player.canvas.width, player.canvas.height);
 					headIKTarget.parent.worldToLocal(temp.set(coords.x, coords.y));
-					headIKTarget.x = temp.x;
-					headIKTarget.y = 1000;
+					temp.x *= IKFollowStrength;
 				}});
 		}	
 	}, 20);
 
 	document.getElementById("player-container").addEventListener("mousedown", () => {
-			player.animationState.setAnimation(1, "Breathing", true);
-			player.animationState.setAnimation(2, "Hair Sway", true);
-			player.animationState.setAnimation(3, "Head Sway", true);
-			player.animationState.setAnimation(4, "ClickInteract", false);
+		player.animationState.setAnimation(1, "Breathing", true);
+		player.animationState.setAnimation(2, "Hair Sway", true);
+		player.animationState.setAnimation(3, "Head Sway", true);
+		player.animationState.setAnimation(4, "ClickInteract", false);
 	});
+	document.addEventListener("mouseleave", () => {
+		
+	});
+
+	requestAnimationFrame(update);
+
+	function update(){
+		if(temp != undefined && headIKTarget != undefined){
+			headIKTarget.x = lerp(headIKTarget.x, temp.x, 0.016 * 4);
+			headIKTarget.y = 1000;
+			bodyIKTarget.x = lerp(bodyIKTarget.x, temp.x, 0.016 * 4);
+			bodyIKTarget.y = 1000;
+		}
+
+		requestAnimationFrame(update);
+	}
+
+	function lerp(start, end, t) {
+		return start * (1 - t) + end * t
+	}
 </script>
