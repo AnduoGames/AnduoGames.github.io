@@ -4,20 +4,46 @@
 <div id="player-container" style="width: 100%; height: 99%vh;"></div>
 
 <script>
-let player = new spine.SpinePlayer("player-container", {
-	jsonUrl: "./skeleton.json",
-	atlasUrl: "./skeleton.atlas",
-	showControls: false,
-	alpha: true, // Enable player translucency
- 	backgroundColor: "#00000000" // Background is fully transparent
-});
+	var headIKTarget;
+	var coords = new spine.webgl.Vector3(), temp = new spine.webgl.Vector3();
 
-let intervalId = setInterval(() => {
-	if(player.loaded){
-		player.animationState.setAnimation(1, "Breathing", true);
-		player.animationState.setAnimation(2, "Hair Sway", true);
-		player.animationState.setAnimation(3, "Head Sway", true);
-		clearInterval(intervalId);
-	}	
-}, 20);
+	let player = new spine.SpinePlayer("player-container", {
+		jsonUrl: "./skeleton.json",
+		atlasUrl: "./skeleton.atlas",
+		showControls: false,
+		alpha: true, // Enable player translucency
+		backgroundColor: "#000000ff" // Background is fully transparent
+	});
+
+	let intervalId = setInterval(() => {
+		if(player.loaded){
+			player.animationState.setAnimation(1, "Breathing", true);
+			player.animationState.setAnimation(2, "Hair Sway", true);
+			player.animationState.setAnimation(3, "Head Sway", true);
+			clearInterval(intervalId);
+			headIKTarget = player.skeleton.findBone("Head Target");
+
+			var input = new spine.webgl.Input(player.canvas);
+			input.addListener({
+				moved: function (x, y) {
+					player.sceneRenderer.camera.screenToWorld(coords.set(x, y, 0), player.canvas.width, player.canvas.height);
+					headIKTarget.parent.worldToLocal(temp.set(coords.x, coords.y));
+					headIKTarget.x = temp.x;
+					headIKTarget.y = 1000;
+				},
+				down: function(x, y) {
+					player.sceneRenderer.camera.screenToWorld(coords.set(x, y, 0), player.canvas.width, player.canvas.height);
+					headIKTarget.parent.worldToLocal(temp.set(coords.x, coords.y));
+					headIKTarget.x = temp.x;
+					headIKTarget.y = 1000;
+				}});
+		}	
+	}, 20);
+
+	document.getElementById("player-container").addEventListener("mousedown", () => {
+			player.animationState.setAnimation(1, "Breathing", true);
+			player.animationState.setAnimation(2, "Hair Sway", true);
+			player.animationState.setAnimation(3, "Head Sway", true);
+			player.animationState.setAnimation(4, "ClickInteract", false);
+	});
 </script>
