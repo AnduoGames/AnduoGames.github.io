@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rosas are Red Dialogue Editor</title>
+  
+  <link rel='stylesheet' href='http://cdn.muicss.com/mui-0.9.34/css/mui.min.css'>
+  <link rel='stylesheet' href='https://rawgit.com/alertifyjs/alertify.js/master/dist/css/alertify.css'>
+  <link rel="stylesheet" href="./style.css">
+  </head>
+  <img src="cgs/CG1.jpg" id="cg1" style="display: none;" />
+  <img src="cgs/CG2___1.jpg" id="cg2_1" style="display: none;" />
+  <img src="cgs/CG2___2.jpg" id="cg2_2" style="display: none;" />
+  <img src="cgs/CG2___3.jpg" id="cg2_3" style="display: none;" />
+  <img src="cgs/CG2 _ 4.jpg" id="cg2_4" style="display: none;" />
+  <img src="cgs/CG2 _ 5.jpg" id="cg2_5" style="display: none;" />
+  <img src="cgs/CG3.jpg" id="cg3" style="display: none;" />
+  <img src="cgs/CG4_1.jpg" id="cg4_1" style="display: none;" />
+  <img src="cgs/CG4_2.jpg" id="cg4_2" style="display: none;" />
+  <img src="cgs/CG4_3.jpg" id="cg4_3" style="display: none;" />
+  <img src="cgs/CG4_4.jpg" id="cg4_4" style="display: none;" />
+  <img src="cgs/CG5.jpg" id="cg5" style="display: none;" />
+  <img src="cgs/CG6.jpg" id="cg6" style="display: none;" />
+  <img src="cgs/CG7.jpg" id="cg7" style="display: none;" />
+  <img src="cgs/CG8.jpg" id="cg8" style="display: none;" />
+  <img src="cgs/CG9.jpg" id="cg9" style="display: none;" />
+  <img src="cgs/Rosa_3.jpg" id="rosa3" style="display: none;" />
+  <img src="cgs/selfie.jpg" id="selfie" style="display: none;" />
+  <body style="background-color: rgb(54, 57, 63); color: rgb(202, 202, 202);">
+    <div class="content">
+      <div id="editor-wrapper">
+        <div class="node-editor" id="editor">
+            <input type="file" id="files" name="file" />
+            
+            <script>
+              function handleFileSelect(evt) {
+                var myFile = evt.target.files[0];
+                var reader = new FileReader();
+                reader.addEventListener("loadend", function() {
+                  // reader.result contains the contents of blob as a typed array
+                  // we insert content of file in DOM here
+                  load(JSON.parse(reader.result));
+                });
+                reader.readAsText(myFile);
+              }
+            
+              document.getElementById('files').addEventListener('change', handleFileSelect, false);
+            </script>
+
+          <br/>
+          <button type="button" id="import" onclick="download('dialogue.json')">Export</button>
+          <br/>
+          <br/>
+          <div>
+            Word Counter: <div id="WordCounter">0</div>
+          </div>
+          <br/>
+          <label class="switch">
+              <input type="checkbox" id="Autoconnect">
+              <span class="slider round"></span>
+            </label> Autoconnect
+            <br/>
+            <br/>
+            <input id="NameInput" placeholder="Dialogue Name"/>
+            <br/>
+            <br/>
+            Default: <select id="Character Default Selection">
+            </select>
+          </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src='https://cdn.jsdelivr.net/npm/rete@1.2.0-rc.6/build/rete.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/alight@0.14.1/alight.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/rete-vue-render-plugin@0.3.3/build/vue-render-plugin.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/rete-connection-plugin@0.4.3/build/connection-plugin.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/rete-context-menu-plugin@0.3.6/build/context-menu-plugin.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/rete-keyboard-plugin@0.1.2/build/keyboard-plugin.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/rete-task-plugin@0.1.7/build/task-plugin.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/rete-comment-plugin@0.3.0/build/comment-plugin.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/rete-history-plugin@0.1.0/build/history-plugin.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/rete-connection-mastery-plugin@0.1.0/build/connection-mastery-plugin.min.js'></script>
+    <script src='http://cdn.muicss.com/mui-0.9.34/js/mui.min.js'></script>
+    <script src='https://rawgit.com/alertifyjs/alertify.js/master/dist/js/alertify.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/rete-area-plugin@0.2.0/build/area-plugin.min.js'></script>
+
+    <script  src="./helper.js"></script>
+    <script  src="./knownCharacters.js"></script>
+    <script  src="./Controls/DialogueTargetInput.js"></script>
+    <script  src="./Controls/IDInputControl.js"></script>
+    <script  src="./Controls/ImageControl.js"></script>
+    <script  src="./Controls/InputControl.js"></script>
+    <script  src="./Controls/SpeakerSelector.js"></script>
+    <script  src="./Controls/NamedInputControl.js"></script>
+    <script  src="./Controls/CheckChoiceControl.js"></script>
+    <script  src="./Components/AnySpeakerDialogueComponent.js"></script>
+    <script  src="./Components/DialogueComponent.js"></script>
+    <script  src="./Components/DialogueStartComponent.js"></script>
+    <script  src="./Components/ImageComponent.js"></script>
+    <script  src="./Components/JumpToOtherDialogue.js"></script>
+    <script  src="./Components/ReplyComponent.js"></script>
+    <script  src="./Components/SetSavekeyComponent.js"></script>
+    <script  src="./Components/CheckSavekeyComponent.js"></script>
+    <script  src="./script.js"></script>
+    <script  src="./changeDefaultStyle.js"></script>
+
+
+
+
+</body>
+
+</html>
