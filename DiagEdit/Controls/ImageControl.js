@@ -6,6 +6,7 @@ class ImageControl extends Rete.Control {
     }
     handler(el, editor) {
         var input = document.createElement("select");
+        addOption(input, "Not Implemented");
         addOption(input, "cg1");
         addOption(input, "cg2_1");
         addOption(input, "cg2_2");
@@ -22,6 +23,14 @@ class ImageControl extends Rete.Control {
         addOption(input, "cg7");
         addOption(input, "cg8");
         addOption(input, "cg9");
+        addOption(input, "cg10");
+        addOption(input, "cg11");
+        addOption(input, "cg12");
+        addOption(input, "cg12.2");
+        addOption(input, "Final_Friend");
+        addOption(input, "Final_Master");
+        addOption(input, "Final_Romance");
+        addOption(input, "Fingering");
         addOption(input, "rosa3");
         addOption(input, "selfie");
         el.appendChild(input);
@@ -37,6 +46,10 @@ class ImageControl extends Rete.Control {
             image.style.width = "100%";
         }
         input.addEventListener("change", () => {
+            if(input.value == "Not Implemented"){
+                image.src = "";
+                return;
+            }
             this.putData(this.key, input.value);
             console.log(input.value);
             image.src = document.getElementById(input.value).src;
