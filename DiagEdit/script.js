@@ -29,7 +29,10 @@ var components = [
     new DialogueStartComponent(),
     new JumpToOtherDialogue(),
     new SetSavekeyComponent(),
-    new CheckSavekeyComponent()
+    new CheckSavekeyComponent(),
+    new AddRoutePointsComponent(),
+    new RouteSwitchComponent(),
+    new VoiceComponent()
 ];
 
 var container = document.getElementById("editor");

@@ -1,5 +1,5 @@
 
-knownCharacters = ["Rosa", "Mia"];
+knownCharacters = ["Rosa", "Mia", "GroupRosa", "GroupMia"];
 
 var defaultSelect = document.getElementById("Character Default Selection");
 

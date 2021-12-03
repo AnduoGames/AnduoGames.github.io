@@ -9,6 +9,18 @@
   <link rel='stylesheet' href='https://rawgit.com/alertifyjs/alertify.js/master/dist/css/alertify.css'>
   <link rel="stylesheet" href="./style.css">
   </head>
+  <source src="audio/Rosa01.mp3" type="audio/mpeg" id="Rosa01.mp3">
+  <source src="audio/Rosa02.mp3" type="audio/mpeg" id="Rosa02.mp3">
+  <source src="audio/Rosa03.mp3" type="audio/mpeg" id="Rosa03.mp3">
+  <source src="audio/Rosa04.mp3" type="audio/mpeg" id="Rosa04.mp3">
+  <source src="audio/Rosa05.mp3" type="audio/mpeg" id="Rosa05.mp3">
+  <source src="audio/Rosa06.mp3" type="audio/mpeg" id="Rosa06.mp3">
+  <source src="audio/Rosa07.mp3" type="audio/mpeg" id="Rosa07.mp3">
+  <source src="audio/Rosa08.mp3" type="audio/mpeg" id="Rosa08.mp3">
+  <source src="audio/Rosa09.mp3" type="audio/mpeg" id="Rosa09.mp3">
+  <source src="audio/Rosa10.mp3" type="audio/mpeg" id="Rosa10.mp3">
+  <source src="audio/Rosa11.mp3" type="audio/mpeg" id="Rosa11.mp3">
+  <source src="audio/Rosa12.mp3" type="audio/mpeg" id="Rosa12.mp3">
   <img src="cgs/CG1.jpg" id="cg1" style="display: none;" />
   <img src="cgs/CG2_1.jpg" id="cg2_1" style="display: none;" />
   <img src="cgs/CG2_2.jpg" id="cg2_2" style="display: none;" />
@@ -36,6 +48,8 @@
   <img src="cgs/CG10.jpg" id="cg10" style="display: none;" />
   <img src="cgs/Fingering.jpg" id="Fingering" style="display: none;" />
   <body style="background-color: rgb(54, 57, 63); color: rgb(202, 202, 202);">
+  
+    <div id="voiceHolderDiv"></div>  
     <div class="content">
       <div id="editor-wrapper">
         <div class="node-editor" id="editor">
@@ -104,6 +118,10 @@
     <script  src="./Controls/SpeakerSelector.js"></script>
     <script  src="./Controls/NamedInputControl.js"></script>
     <script  src="./Controls/CheckChoiceControl.js"></script>
+    <script  src="./Controls/RouteSelector.js"></script>
+    <script  src="./Controls/NumberControl.js"></script>
+    <script  src="./Controls/DescriptionControl.js"></script>
+    <script  src="./Controls/VoiceControl.js"></script>
     <script  src="./Components/AnySpeakerDialogueComponent.js"></script>
     <script  src="./Components/DialogueComponent.js"></script>
     <script  src="./Components/DialogueStartComponent.js"></script>
@@ -112,6 +130,9 @@
     <script  src="./Components/ReplyComponent.js"></script>
     <script  src="./Components/SetSavekeyComponent.js"></script>
     <script  src="./Components/CheckSavekeyComponent.js"></script>
+    <script  src="./Components/AddRoutePointsComponent.js"></script>
+    <script  src="./Components/RouteSwitchComponent"></script>
+    <script  src="./Components/VoiceComponent.js"></script>
     <script  src="./script.js"></script>
     <script  src="./changeDefaultStyle.js"></script>
 

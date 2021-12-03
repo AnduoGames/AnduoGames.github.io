@@ -1,11 +1,12 @@
-class InputControl extends Rete.Control {
+class NumberControl extends Rete.Control {
     constructor(key) {
         super(key);
         this.render = "js";
         this.key = key;
     }
     handler(el, editor) {
-        var input = document.createElement("textarea");
+        var input = document.createElement("input");
+        input.type = "number";
         el.appendChild(input);
         var text = this.getData(this.key) || "";
         input.value = text;
@@ -20,8 +21,4 @@ class InputControl extends Rete.Control {
             e.stopPropagation();
         });
     }
-}
-
-function highlight(input){
-    
 }
