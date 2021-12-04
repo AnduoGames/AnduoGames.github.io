@@ -33,7 +33,8 @@ var components = [
     new AddRoutePointsComponent(),
     new RouteSwitchComponent(),
     new VoiceComponent(),
-    new EmojiComponent()
+    new EmojiComponent(),
+    new DelayComponent()
 ];
 
 var container = document.getElementById("editor");

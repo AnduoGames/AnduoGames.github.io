@@ -7,7 +7,7 @@ class RouteSwitchComponent extends Rete.Component {
     }
     builder(node) {
         var inp1 = new Rete.Input("act", "In", actSocket, true);
-        var ctrl = new DescriptionControl("text");
+        var ctrl = new DescriptionControl("text", "Will go down the route</br>of the highest points.");
         var out1 = new Rete.Output("master", "Master", actSocket);
         var out2 = new Rete.Output("romance", "Romance", actSocket);
         var out3 = new Rete.Output("friend", "Friend", actSocket);
