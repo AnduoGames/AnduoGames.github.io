@@ -32,7 +32,8 @@ var components = [
     new CheckSavekeyComponent(),
     new AddRoutePointsComponent(),
     new RouteSwitchComponent(),
-    new VoiceComponent()
+    new VoiceComponent(),
+    new EmojiComponent()
 ];
 
 var container = document.getElementById("editor");

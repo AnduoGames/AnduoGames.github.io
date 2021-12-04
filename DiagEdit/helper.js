@@ -117,7 +117,7 @@ function load(input)
 
 function addOption(addTo, name)
 {
-    var option = document.createElement("option");
+    let option = document.createElement("option");
     option.innerHTML = name;
     addTo.appendChild(option);
 }
