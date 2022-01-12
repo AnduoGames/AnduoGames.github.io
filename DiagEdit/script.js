@@ -1,13 +1,10 @@
-// https://rete.readthedocs.io/en/latest/Plugins/
-
 var actSocket = new Rete.Socket("Action");
 var wordCounter = document.getElementById("WordCounter");
 var nameField = document.getElementById("NameInput");
 var InitDone = false;
 
 const JsRenderPlugin = {
-    install(editor, params = {})
-    {
+    install(editor, params = {}) {
         editor.on("rendercontrol", (
             {
                 el,
@@ -63,8 +60,7 @@ editor.fromJSON(
         alertify.error(err.message);
     });
 
-    editor.on("process connectioncreated connectionremoved nodecreated", async function ()
-    {
+    editor.on("process connectioncreated connectionremoved nodecreated", async function () {
         if (engine.silent)
             return;
     });
@@ -74,30 +70,61 @@ editor.fromJSON(
     AreaPlugin.zoomAt(editor);
 });
 
+editor.on('translate', e => {
+    //console.log(e);
+    return isControlDown;
+});
+
+var isControlDown = false;
+editor.on('keydown', e => {
+    if (e.key == "Control") isControlDown = true;
+})
+editor.on('keyup', e => {
+    if (e.key == "Control") isControlDown = false;
+})
+
+editor.on('nodetranslate', e => {
+    console.log(e);
+    let textField = GetTextfieldActive();
+    if(!textField) return true;
+
+    return false;
+})
+
+function GetTextfieldActive() {
+    var activeElement = document.activeElement;
+    var inputs = ['input', 'textarea'];
+
+    console.log(activeElement.tagName.toLowerCase());
+
+    if (activeElement && inputs.indexOf(activeElement.tagName.toLowerCase()) !== -1) {
+        return activeElement;
+    }
+    return undefined;
+}
+
 editor.on('keydown', e => {
     displayWordCount();
 
-    if ($("input,textarea").is(":focus"))
-    { // input and text area has focus
+    if ($("input,textarea").is(":focus")) { // input and text area has focus
         return;
     }
-    switch (e.code)
-    {
+    switch (e.code) {
         case 'Delete': editor.selected.each(n => editor.removeNode(n));
             break;
         case 'Space':
             let rect = editor.view.container.getBoundingClientRect();
             let event = new MouseEvent('contextmenu',
-            {
-                clientX: rect.left + rect.width / 2,
-                clientY: rect.top + rect.height / 2
-            });
+                {
+                    clientX: rect.left + rect.width / 2,
+                    clientY: rect.top + rect.height / 2
+                });
 
             editor.trigger('contextmenu',
-            {
-                e: event,
-                view: editor.view
-            });
+                {
+                    e: event,
+                    view: editor.view
+                });
             break;
         default:
             break;
@@ -105,8 +132,7 @@ editor.on('keydown', e => {
 });
 
 editor.on('nodecreated', newNode => {
-    if (editor.selected.list.length > 0 && document.getElementById("Autoconnect").checked)
-    {
+    if (editor.selected.list.length > 0 && document.getElementById("Autoconnect").checked) {
         editor.selected.each(n => {
             var output = n.outputs.get("t");
             var input = newNode.inputs.get("act");

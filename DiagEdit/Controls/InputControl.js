@@ -16,9 +16,9 @@ class InputControl extends Rete.Control {
         input.addEventListener('input', () => {
             this.putData(this.key, input.value);
         }, false);
-        input.click(function (e) {
-            e.stopPropagation();
-        });
+        /*input.click(function (e) {
+            //e.stopPropagation();
+        });*/
     }
 }
 
