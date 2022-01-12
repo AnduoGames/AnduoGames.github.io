@@ -71,7 +71,6 @@ editor.fromJSON(
 });
 
 editor.on('translate', e => {
-    //console.log(e);
     return isControlDown;
 });
 
@@ -84,7 +83,6 @@ editor.on('keyup', e => {
 })
 
 editor.on('nodetranslate', e => {
-    console.log(e);
     let textField = GetTextfieldActive();
     if(!textField) return true;
 
@@ -94,8 +92,6 @@ editor.on('nodetranslate', e => {
 function GetTextfieldActive() {
     var activeElement = document.activeElement;
     var inputs = ['input', 'textarea'];
-
-    console.log(activeElement.tagName.toLowerCase());
 
     if (activeElement && inputs.indexOf(activeElement.tagName.toLowerCase()) !== -1) {
         return activeElement;

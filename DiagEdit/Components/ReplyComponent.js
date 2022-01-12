@@ -12,10 +12,10 @@ class ReplyComponent extends Rete.Component
     {
         var inp1 = new Rete.Input("act", "In", actSocket, true);
         var out1 = new Rete.Output("t", "Out", actSocket);
-
+        var routeDropdown = new RouteSelector("route");
         var ctrl = new InputControl("text");
 
-        return node.addControl(ctrl).addInput(inp1).addOutput(out1);
+        return node.addControl(routeDropdown).addControl(ctrl).addInput(inp1).addOutput(out1);
     }
 
     worker(node, inputs)
