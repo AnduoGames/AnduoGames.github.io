@@ -62,6 +62,59 @@ if (params.load !== undefined)
     OpenFile(params.load + ".txt");
 }
 
+function loadLatestCache(){
+    let latest = JSON.parse(localStorage.getItem("dialogue cache latest"));
+    console.log(latest);
+    load(latest.data);
+}
+
+// every 5 minutes, autosave
+setInterval(() => {
+    let latest = JSON.stringify({timestamp: Date.now(), data: editor.toJSON()});
+    let currentStorage = JSON.parse(localStorage.getItem("dialogue cache"));
+    if(currentStorage == undefined || currentStorage == "") currentStorage = [];
+
+    if(currentStorage.length > 0){
+        let lastElement = JSON.stringify(JSON.parse(currentStorage[currentStorage.length - 1]).data);
+        let latestParsed = JSON.stringify(JSON.parse(latest).data);
+        if(latestParsed == "{\"id\":\"demo@0.1.0\",\"nodes\":{}}"){
+            return;
+        }
+        if(lastElement == latestParsed) {
+            return;
+        }
+    }
+
+    if(currentStorage.length > 5) currentStorage.shift();
+    currentStorage.push(latest);
+    localStorage.setItem("dialogue cache", JSON.stringify(currentStorage));
+
+    LoadCacheSelect();
+}, 600000);
+
+
+let cacheSelect = document.getElementById("Cache Selection");
+function LoadCacheSelect(){
+    removeOptions(cacheSelect);
+
+    let currentStorage = JSON.parse(localStorage.getItem("dialogue cache"));
+    if(currentStorage == undefined || currentStorage == "") currentStorage = [];
+    
+    currentStorage.forEach(x => {
+        let currentDialogue = JSON.parse(x);
+        let date = new Date(currentDialogue.timestamp);
+        let option = addOption(cacheSelect, date.toLocaleString("en-US"));
+        option.value = JSON.stringify(currentDialogue.data);
+    });
+}
+
+LoadCacheSelect();
+
+function loadFromSelectedCache(){
+    let toLoad = JSON.parse(cacheSelect.options[cacheSelect.selectedIndex].value);
+    load(toLoad);
+}
+
 
 function download(filename)
 {
@@ -120,4 +173,12 @@ function addOption(addTo, name)
     let option = document.createElement("option");
     option.innerHTML = name;
     addTo.appendChild(option);
+    return option;
 }
+
+function removeOptions(selectElement) {
+    var i, L = selectElement.options.length - 1;
+    for(i = L; i >= 0; i--) {
+       selectElement.remove(i);
+    }
+ }

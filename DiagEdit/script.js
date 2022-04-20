@@ -60,9 +60,14 @@ editor.fromJSON(
         alertify.error(err.message);
     });
 
-    editor.on("process connectioncreated connectionremoved nodecreated", async function () {
+    editor.on("process connectioncreated connectionremoved nodecreated", async function () {        
         if (engine.silent)
             return;
+    });
+
+    editor.on("selectnode", () => {
+        let latest = JSON.stringify({timestamp: Date.now(), data: editor.toJSON()});
+        localStorage.setItem("dialogue cache latest", latest);
     });
 
     editor.trigger("process");
