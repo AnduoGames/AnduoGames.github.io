@@ -4,14 +4,16 @@ var currentVoiceSource = null;
 class VoiceControl extends Rete.Control {
 
     constructor(key) {
+        voiceClips = [];
         for (let i = 0; i < 12; i++) {
             let num = i + 1;
-            if(i < 9)
+            if (i < 9)
                 num = "0" + num;
             else
                 num = "" + num;
             voiceClips.push("Rosa" + num + ".mp3");
         }
+        voiceClips.push("Not Implemented");
         super(key);
         this.render = "js";
         this.key = key;
@@ -32,11 +34,14 @@ class VoiceControl extends Rete.Control {
             this.putData(this.key, input.options[input.selectedIndex].innerHTML);
         }, false);
         input.addEventListener("change", () => {
-            this.putData(this.key, input.options[input.selectedIndex].innerHTML);
-            document.getElementById("voiceHolderDiv").appendChild(currentVoiceSource);
-            currentVoiceSource = document.getElementById(voiceClips[input.selectedIndex]);
-            audio.appendChild(currentVoiceSource);
-            audio.load();
+            let selectedElement = document.getElementById(voiceClips[input.selectedIndex]);
+            if (selectedElement != null && selectedElement != undefined) {
+                this.putData(this.key, input.options[input.selectedIndex].innerHTML);
+                document.getElementById("voiceHolderDiv").appendChild(currentVoiceSource);
+                currentVoiceSource = document.getElementById(voiceClips[input.selectedIndex]);
+                audio.appendChild(currentVoiceSource);
+                audio.load();
+            }
         });
 
         el.appendChild(document.createElement("br"));

@@ -9,7 +9,8 @@ class VoiceComponent extends Rete.Component {
         var inp1 = new Rete.Input("act", "In", actSocket, true);
         var ctrl = new VoiceControl("audiofile");
         var out1 = new Rete.Output("t", "Out", actSocket);
-        return node.addControl(ctrl).addInput(inp1).addOutput(out1);
+        var altctrl = new InputControl("altText");
+        return node.addControl(ctrl).addControl(altctrl).addInput(inp1).addOutput(out1);
     }
     worker(node, inputs) {
         
