@@ -1,0 +1,14 @@
+<a href="https://store.steampowered.com/app/3400350"
+   onclick="openSteam(event)">
+   View on Steam
+</a>
+
+<script>
+function openSteam(e) {
+  e.preventDefault();
+  window.location = "steam://store/3400350";
+  setTimeout(() => {
+    window.location = "https://store.steampowered.com/app/3400350";
+  }, 500);
+}
+</script>
