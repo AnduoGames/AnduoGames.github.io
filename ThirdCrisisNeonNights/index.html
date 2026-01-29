@@ -1,14 +1,21 @@
-<a href="https://store.steampowered.com/app/3400350"
-   onclick="openSteam(event)">
-   View on Steam
-</a>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Opening Steam…</title>
+</head>
+<body>
+  <p>Opening Steam… If nothing happens, you’ll be redirected.</p>
 
-<script>
-function openSteam(e) {
-  e.preventDefault();
-  window.location = "steam://store/3400350";
-  setTimeout(() => {
-    window.location = "https://store.steampowered.com/app/3400350";
-  }, 500);
-}
-</script>
+  <script>
+    const steamUrl = "steam://store/3400350";
+    const webUrl   = "https://store.steampowered.com/app/3400350";
+
+    window.location = steamUrl;
+
+    setTimeout(() => {
+      window.location = webUrl;
+    }, 700);
+  </script>
+</body>
+</html>
