@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Play:wght@400;700&family=Rubik+Glitch&family=Zen+Dots&display=swap" rel="stylesheet">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Third Crisis: Neon Nights">
@@ -21,18 +24,24 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: #fff;
       background: #0b1020;
       display: grid;
       place-items: center;
+      font-family: "Play", sans-serif;
+      font-weight: 400;
+      font-style: normal;
     }
     .bg {
       position: fixed;
       inset: 0;
-      background:
+      background-image: url("SLP_background3.jpg");
+      background-repeat: no-repeat;
+      background-color: #020305;
+      background-position-x: center;
+      /*background:
         radial-gradient(1200px 600px at 50% 0%, rgba(0, 153, 255, 0.20), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.85));
+        linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.85));*/
       pointer-events: none;
     }
     .wrap {
@@ -50,7 +59,7 @@
     }
     .banner {
       position: relative;
-      aspect-ratio: 16/5;
+      aspect-ratio: 16/2.8;
       background: #111;
       overflow: hidden;
     }
@@ -72,25 +81,41 @@
     button, a.btn {
       appearance: none;
       border: 0;
-      border-radius: 12px;
-      padding: 11px 14px;
-      font-weight: 650;
+      /*border-radius: 12px;
+      padding: 11px 14px;*/
+      padding: 6px 10px 20px 10px;
+      margin-right: 10px;
+      width: 212px;
+      height: 48px;
       cursor: pointer;
       text-decoration: none;
-      display: inline-flex;
+      /*display: inline-flex;*/
       align-items: center;
       gap: 10px;
       user-select: none;
+      background-color: rgba(255,255,255,0);
+      font-family: "Play", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 24px;
+      background-image: url("SLP_button_base.png"); 
+      color: #ffffff; 
     }
-    button.primary { background: #1a9fff; color: #04101a; }
-    a.btn.secondary { background: rgba(255,255,255,0.10); color: #fff; }
-    a.btn.itchio { background: #fa5c5c; color: #fff; }
+    button:hover, a.btn:hover {
+      background-image: url("SLP_button_hover.png");
+    }
+    button.primary { }
+    a.btn.secondary {  }
+    a.btn.itchio { }
     .fineprint { font-size: 12px; opacity: 0.8; }
     .kbd {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       background: rgba(255,255,255,0.10);
       padding: 2px 6px;
       border-radius: 6px;
+    }
+    .centered {
+      text-align: center;
     }
   </style>
 </head>
@@ -112,22 +137,22 @@
       </div>
 
       <div class="content">
-        <h1>Open in the Steam client (recommended)</h1>
+        <!--<h1>Open in the Steam client (recommended)</h1>-->
         <p>
-          Your browser will ask for permission to open Steam. Click <span class="kbd">Open</span> to continue.
-          If you cancel, you can still use the web store link below.
-        </p>
-
-        <div class="row">
+          Your browser will ask for permission to open Steam. 
+          <br>
+          Click <span class="kbd">Open Steam</span> to continue.
+          If you cancel, you can still use the store links above.
+          <br>
+          <br>
+          </p>
+        <p class="centered">
           <button class="primary" type="button" onclick="openSteam()">Open in Steam</button>
-          <a class="btn secondary" href="https://store.steampowered.com/app/3400350" rel="noopener">Open web store</a>
-          <a class="btn itchio" href="https://anduogames.itch.io/third-crisis-neon-nights" rel="noopener">itch.io</a>
+          <button class="btn secondary" onclick="window.location.href='https://store.steampowered.com/app/3400350'" rel="noopener">Steam Webstore</button>
+          <button class="btn itchio" onclick="window.location.href='https://anduogames.itch.io/third-crisis-neon-nights'" rel="noopener">itch.io</button>
+        </p>
+        <div>
         </div>
-
-        <!--<p class="fineprint">
-          Note: some browsers require this to be triggered by a click (which is why there’s a button).
-          There is intentionally no auto-redirect timeout.
-        </p>-->
       </div>
     </div>
   </div>
@@ -141,7 +166,7 @@
       window.location.href = steamUrl;
     }
 
-    openSteam();
+    //openSteam();
   </script>
 </body>
 </html>
